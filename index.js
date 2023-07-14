@@ -26,9 +26,10 @@ app.post("/create", async (req, res) => {
   }
 });
 
-app.put("/update", async (req, res) => {
+app.put("/update/:id", async (req, res) => {
   try {
-    const { id } = req.query;
+    console.log(req, "efkmkfe");
+    const { id } = req.params;
     console.log(id);
     const form = await Form.findByIdAndUpdate(id, { ...req.body });
     res.json({ message: "Updated Successfully" }).status(200);
@@ -37,10 +38,11 @@ app.put("/update", async (req, res) => {
   }
 });
 
-app.delete("/delete", async (req, res) => {
+app.delete("/delete/:id", async (req, res) => {
   try {
-    const { id } = req.query;
-    const form = await Form.findByIdAndDelete(id);
+    const { id } = req.params;
+    console.log(id);
+    // const form = await Form.findByIdAndDelete(id);
     res.json({ message: "Deleted Successfully" }).status(200);
   } catch (e) {
     console.log(e);
